@@ -14,7 +14,7 @@ char apPassword[20]="manteio123";
 // FASTLED
 #include <FastLED.h>
 #define NUM_REEDS 9
-#define DATA_PIN 14
+#define DATA_PIN 13
 
 CRGB leds[NUM_REEDS];
 uint8_t indexLed = 0;
