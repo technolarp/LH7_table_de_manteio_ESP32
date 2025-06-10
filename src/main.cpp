@@ -49,7 +49,7 @@ void setup()
   Serial.println(F(""));
   Serial.println(F("----------------------------------------------------------------------------"));
   Serial.println(F("MANTEIO - https://github.com/technolarp/"));
-  Serial.println(F("version 0.2.0 - 04/2025"));
+  Serial.println(F("version 1.0.0 - 06/2025"));
   Serial.println(F("----------------------------------------------------------------------------"));
 
   // FASTLED
@@ -168,18 +168,30 @@ void loop()
       }
       Serial.println(F(" "));
 
-      uint16_t movie = 0;
-
+      int8_t check = 0;
+      int8_t movie = 0;
       for (int8_t i=0;i<NUM_REEDS;i++)
       {
-        movie = movie + (uint16_t) pow(2,i)*reedState[i];
+        check = check + reedState[i];
       }
 
+      int8_t multiple = 10;
+      if (check==2)
+      {
+        for (int8_t i=0;i<NUM_REEDS;i++)
+        {
+          if (reedState[i]==1)
+          {
+            movie=movie + (i+1)*multiple;
+            multiple=1;
+          }          
+        }
+      }
       Serial.print("movie: ");
       Serial.println(movie);
-      
-      httpPutRequest(movie);
 
+      httpPutRequest(movie);
+      
       previousMillisDebounce=millis();
     }
   }
@@ -229,7 +241,7 @@ void httpPutRequest(uint16_t movie)
   HTTPClient http;
   IPAddress apGW = WiFi.gatewayIP();
 
-  String toSend =  "http://" + String(apGW[0]) + "." + String(apGW[1]) + "." + String(apGW[2]) + "." + String(apGW[3]) + ":8000/manteio/" + movie;
+  String toSend =  "http://" + String(apGW[0]) + "." + String(apGW[1]) + "." + String(apGW[2]) + "." + String(apGW[3]) + ":8000/manteio?play=" + movie;
   Serial.println(toSend);
   
   http.begin(toSend);
