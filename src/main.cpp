@@ -2,7 +2,7 @@
    ----------------------------------------------------------------------------
    TECHNOLARP - https://technolarp.github.io/
    TABLE DE MANTEIO ESP32 - https://github.com/technolarp/LH7_table_de_manteio_ESP32
-   version 1.0.0 - 06/2025
+   version 1.0.1 - 06/2025
    ----------------------------------------------------------------------------
 */
 
@@ -57,7 +57,7 @@ void setup()
   Serial.println(F(""));
   Serial.println(F("----------------------------------------------------------------------------"));
   Serial.println(F("TABLE DE MANTEIO ESP32 - https://github.com/technolarp/LH7_table_de_manteio_ESP32"));
-  Serial.println(F("version 1.0.0 - 06/2025"));
+  Serial.println(F("version 1.0.1 - 06/2025"));
   Serial.println(F("----------------------------------------------------------------------------"));
 
   // FASTLED
