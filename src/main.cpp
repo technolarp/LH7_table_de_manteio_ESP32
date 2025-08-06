@@ -2,7 +2,7 @@
    ----------------------------------------------------------------------------
    TECHNOLARP - https://technolarp.github.io/
    TABLE DE MANTEIO ESP32 - https://github.com/technolarp/LH7_table_de_manteio_ESP32
-   version 1.0.1 - 06/2025
+   version 1.0.2 - 08/2025
    ----------------------------------------------------------------------------
 */
 
@@ -22,7 +22,11 @@ char apPassword[20]="manteio123";
 // FASTLED
 #include <FastLED.h>
 #define NUM_REEDS 9
-#define DATA_PIN 13
+// board V1.0
+//#define DATA_PIN 13
+// board V1.1
+#define DATA_PIN 14
+
 
 CRGB leds[NUM_REEDS];
 uint8_t indexLed = 0;
@@ -57,7 +61,7 @@ void setup()
   Serial.println(F(""));
   Serial.println(F("----------------------------------------------------------------------------"));
   Serial.println(F("TABLE DE MANTEIO ESP32 - https://github.com/technolarp/LH7_table_de_manteio_ESP32"));
-  Serial.println(F("version 1.0.1 - 06/2025"));
+  Serial.println(F("version 1.0.2 - 08/2025"));
   Serial.println(F("----------------------------------------------------------------------------"));
 
   // FASTLED
@@ -249,7 +253,8 @@ void httpPutRequest(uint16_t movie)
   HTTPClient http;
   IPAddress apGW = WiFi.gatewayIP();
 
-  String toSend =  "http://" + String(apGW[0]) + "." + String(apGW[1]) + "." + String(apGW[2]) + "." + String(apGW[3]) + ":8000/manteio?play=" + movie;
+  //String toSend =  "http://" + String(apGW[0]) + "." + String(apGW[1]) + "." + String(apGW[2]) + "." + String(apGW[3]) + ":8000/manteio?play=" + movie;
+  String toSend =  "http://192.168.1.10:8000/manteio?play=" + String(movie);
   Serial.println(toSend);
   
   http.begin(toSend);
